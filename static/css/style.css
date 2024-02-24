@@ -11,7 +11,6 @@ h1 {
 }
 
 body {
-    background-color: #90ee90;
     background-image: url("/static/images/hotel_back.jpg");
     background-size: cover;
     background-repeat: no-repeat;

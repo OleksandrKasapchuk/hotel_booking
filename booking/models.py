@@ -6,6 +6,8 @@ class User(models.Model):
     surname = models.CharField(max_length=50)
     email = models.EmailField()
 
+    def __str__(self):
+        return self.name
 
 class Room(models.Model):
     number = models.IntegerField()

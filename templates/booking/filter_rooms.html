@@ -1,0 +1,10 @@
+{% extends "booking/base.html" %}
+
+{% block main %}
+
+<ul>
+    {% for room in rooms %}
+        <li>{{ room }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

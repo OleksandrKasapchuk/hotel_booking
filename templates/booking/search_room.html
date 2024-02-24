@@ -1,0 +1,12 @@
+{% extends "booking/base.html" %}
+
+{% block main %}
+
+    <form method="POST" action="{% url 'search-room' %}">
+    {% csrf_token %}
+        <label for="room-capacity">Capacity: </label>
+        <input type="number" placeholder="1-4" id="room-capacity" name="room-capacity">
+        <button type="submit">Search</button>
+    </form>
+
+{% endblock %}
