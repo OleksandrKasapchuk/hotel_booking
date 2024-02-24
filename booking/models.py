@@ -1,18 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import User
+
+
+class User(models.Model):
+    name = models.CharField(max_length=50)
+    surname = models.CharField(max_length=50)
+    email = models.EmailField()
+
 
 class Room(models.Model):
     number = models.IntegerField()
     capacity = models.IntegerField()
     location = models.TextField()
 
-    def __str__(self):
-        return f"Room #{self.number} for {self.capacity}"
-    
     class Meta:
         verbose_name = "Room"
         verbose_name_plural = "Rooms"
         ordering = ["number", "-capacity"]
+
+    def __str__(self):
+        return f"Room #{self.number} for {self.capacity}"
+
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookings")

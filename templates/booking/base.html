@@ -7,10 +7,17 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body>    
+    <nav>
+        {% block nav %}
+        {% endblock %}
+    </nav>
     <main>
         {% block main %}
         {% endblock %}
     </main>
+    <footer>
+        <h3>Our contacts:</h3>
+    </footer>
 </body>
 </html>
