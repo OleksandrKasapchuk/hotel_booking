@@ -1,20 +1,10 @@
 {% extends "booking/base.html" %}
 
-{% block nav %}
-
-<ul>
-    <li><a href="#">Tashkent</a></li>
-    <li><a href="#">Info</a></li>
-    <li><a href="#">Sign in</a></li>
-</ul>
-
-{% endblock %}
-
 {% block main %}
 
 <ul>
     {% for room in rooms %}
-    <li>{{ room }}</li>
+    <h3><li><a href="{% url 'room-details' room.id %}">{{ room }}</a></li></h3>
     {% endfor %}
 </ul>
 {% endblock %}

@@ -9,8 +9,16 @@
 </head>
 <body>    
     <nav>
-        {% block nav %}
-        {% endblock %}
+        <ul>
+            <li><a href="{% url 'index' %}">Tashkent</a></li>
+            <li> {% include "booking/search_room.html" %} </li>
+            <li><a href="#">Info</a></li>
+            {% if request.user.is_unauthenticated %}
+                <li><a href="#">Sign in</a></li>
+            {% else %}
+                <li><a href="#">Log out</a></li>
+            {% endif %}
+        </ul>
     </nav>
     <main>
         {% block main %}
