@@ -2,8 +2,6 @@
 
 
 {% block main %}
-<h1> {{room.id}} </h1>
-<h2>hello</h2>
     <form method="POST" action="{% url 'book-room' room.id %}">
     {% csrf_token %}
         <input type="text" id="name" name="name" placeholder="name">
