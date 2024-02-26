@@ -1,0 +1,15 @@
+{% extends "booking/base.html" %}
+
+
+{% block main %}
+    <form method="POST" action="{% url 'sign-in'  %}">
+    {% csrf_token %}
+        <input type="text" id="name" name="sign-in-name" placeholder="name">
+        <br>
+        <input type="text" id="surname" name="sign-in-surname" placeholder="surname">
+        <br>
+        <input type="text" id="email" name="sign-in-email" placeholder="email">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

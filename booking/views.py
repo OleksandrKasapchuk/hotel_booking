@@ -7,6 +7,11 @@ def index(request):
         request,
         "booking/index.html"
     )
+def hotel_info(request):
+    return render(
+        request,
+        "booking/hotel_info.html"
+    )
 def show_rooms(request):
     context = {"rooms": Room.objects.all()}
     return render(
@@ -58,7 +63,7 @@ def book_room(request, room_id):
         return redirect("booking-info", pk = booking.id)
     else:
         context = {"room": Room.objects.get(id=room_id)}
-        return render(request, template_name="booking/book-room.html", context=context)
+        return render(request, template_name="booking/book_room.html", context=context)
 
 def show_booking_details(request, pk):
     try:
@@ -71,3 +76,27 @@ def show_booking_details(request, pk):
             status=404
         )
     
+def sign_in(request):
+    if request.method == "POST":
+        name = request.POST.get('sign-in-name')
+        surname = request.POST.get('sign-in-surname')
+        email = request.POST.get('sign-in-email')
+        try:
+            user = User.objects.get(name=name, surname=surname, email=email)
+        except User.DoesNotExist:
+            user = User(name=name, surname=surname, email=email)
+            user.save()
+        return redirect("user-info", pk=user.id)
+    else:
+        return render(request, "booking/authentication.html")
+
+def user_info(request, pk):
+    try:
+        user = User.objects.get(id=pk)
+        context = {'user': user}
+        return render(request, 'booking/user_info.html', context=context)
+    except User.DoesNotExist:
+        return HttpResponse (
+            "User doesn't exist!",
+            status=404
+        )
