@@ -5,7 +5,7 @@ from django.http import HttpResponse
 def index(request):
     return render(
         request,
-        template_name="booking/index.html"
+        "booking/index.html"
     )
 def show_rooms(request):
     context = {"rooms": Room.objects.all()}
@@ -19,7 +19,7 @@ def get_room(request, room_id):
     context = {"room": Room.objects.get(id=room_id)}
     return render(
         request,
-        template_name="booking/room_details.html",
+        "booking/room_details.html",
         context=context
     )
 
@@ -34,8 +34,40 @@ def search_room(request):
         context = {"rooms":rooms}
         return render(
             request,
-            template_name="booking/filter_rooms.html",
+            "booking/filter_rooms.html",
             context=context
         )          
     else:
         return render(request, "booking/search_room.html")
+
+def book_room(request, room_id):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        email = request.POST.get('email')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+        room = Room.objects.get(id=room_id)
+        try:
+            user = User.objects.get(name=name, surname=surname, email=email)
+        except User.DoesNotExist:
+            user = User(name=name, surname=surname, email=email)
+            user.save()
+        booking = Booking.objects.create(user=user, room=room, start_time=start_time,end_time=end_time)
+        
+        return redirect("booking-info", pk = booking.id)
+    else:
+        context = {"room": Room.objects.get(id=room_id)}
+        return render(request, template_name="booking/book-room.html", context=context)
+
+def show_booking_details(request, pk):
+    try:
+        booking = Booking.objects.get(id=pk)
+        context = {'booking': booking}
+        return render(request, 'booking/booking_info.html', context=context)
+    except Booking.DoesNotExist:
+        return HttpResponse (
+            "Booking doesn't exist!",
+            status=404
+        )
+    
