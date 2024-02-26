@@ -71,20 +71,21 @@ footer {
     position: relative;
     display: flex;
     height: 100%;
+    width: 225px;
     flex-direction: column;
     justify-content: center;
     align-items: end;
 }
 #room-capacity {
-    height: 50%;
+    height: 55%;
+    width: 100%;
 }
 #room-capacity::placeholder {
-    font-size: 11px;
+    font-size: 14px;
 }
 .button-search {
     position: absolute;
-    /* right: 0;
-    top: 9px; */
+    top: 13px;
     background: none;
     border: 0;
 }

@@ -7,6 +7,11 @@ def index(request):
         request,
         "booking/index.html"
     )
+def hotel_info(request):
+    return render(
+        request,
+        "booking/hotel_info.html"
+    )
 def show_rooms(request):
     context = {"rooms": Room.objects.all()}
     return render(
@@ -58,7 +63,7 @@ def book_room(request, room_id):
         return redirect("booking-info", pk = booking.id)
     else:
         context = {"room": Room.objects.get(id=room_id)}
-        return render(request, template_name="booking/book-room.html", context=context)
+        return render(request, template_name="booking/book_room.html", context=context)
 
 def show_booking_details(request, pk):
     try:
