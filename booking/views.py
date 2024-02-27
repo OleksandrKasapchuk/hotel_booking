@@ -13,7 +13,7 @@ def hotel_info(request):
         "booking/hotel_info.html"
     )
 def show_rooms(request):
-    context = {"rooms": Room.objects.all()}
+    context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
     return render(
         request,
         template_name="booking/rooms.html",
@@ -53,6 +53,8 @@ def book_room(request, room_id):
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
         room = Room.objects.get(id=room_id)
+        room.available = False
+        room.save()
         try:
             user = User.objects.get(name=name, surname=surname, email=email)
         except User.DoesNotExist:
