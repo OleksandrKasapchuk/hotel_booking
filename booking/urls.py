@@ -5,6 +5,7 @@ urlpatterns = [
     path("", booking_views.index, name="index"),
     path("hotel-info/", booking_views.hotel_info, name="hotel-info"),
     path("user-info/<int:pk>", booking_views.user_info, name="user-info"),
+    path("register/", booking_views.register_user, name="register"),
     path("login/", booking_views.login_user, name="login"),
     path("logout/", booking_views.logout_user, name="logout"),
     path("rooms/", booking_views.show_rooms, name="rooms"),

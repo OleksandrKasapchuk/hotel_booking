@@ -8,14 +8,9 @@
         {% csrf_token %}
         <input type="text" id="username" name="username" placeholder="username">
         <br>
-        <input type="text" id="first_name" name="first_name" placeholder="first name">
-        <br>
-        <input type="text" id="last_name" name="last_name" placeholder="last name">
-        <br>
-        <input type="email" id="email" name="email" placeholder="email">
-        <br>
         <input type="password" id="password" name="password" placeholder="password">
         <br>
+        <a href="{% url 'register' %}">Don't have an account?</a>
         <button type="submit">Submit</button>
     </form>
 {% endblock %}

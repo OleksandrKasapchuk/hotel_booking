@@ -79,16 +79,30 @@ def show_booking_details(request, pk):
             "Booking doesn't exist!",
             status=404
         )
-    
+
+def register_user(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        name = request.POST.get('first_name')
+        surname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        new_user = User.objects.create_user(username=username, first_name=name, last_name=surname, email=email, password=password)
+        new_user.save()
+        user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
+        login(request, user)
+
+        return redirect("index")
+    else:
+        return render(request, "booking/register.html")
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get("username")
-        name = request.POST.get('first_name')
-        surname = request.POST.get('last_surname')
-        email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
+        user = authenticate(username=username,password=password)
         
         if user is not None:
             login(request, user)
