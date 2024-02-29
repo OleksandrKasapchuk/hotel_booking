@@ -1,0 +1,21 @@
+{% extends "booking/base.html" %}
+
+
+{% block main %}
+    <h1>Register</h1>
+    <br>
+    <form method="POST" action="{% url 'register'  %}">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="username">
+        <br>
+        <input type="text" id="first_name" name="first_name" placeholder="first name">
+        <br>
+        <input type="text" id="last_name" name="last_name" placeholder="last name">
+        <br>
+        <input type="email" id="email" name="email" placeholder="email">
+        <br>
+        <input type="password" id="password" name="password" placeholder="password">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

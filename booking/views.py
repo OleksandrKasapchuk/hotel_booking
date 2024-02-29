@@ -1,17 +1,23 @@
 from django.shortcuts import render, redirect
 from booking.models import *
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
 
 def index(request):
     return render(
         request,
         "booking/index.html"
     )
+
 def hotel_info(request):
     return render(
         request,
         "booking/hotel_info.html"
     )
+
 def show_rooms(request):
     context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
     return render(
@@ -46,26 +52,22 @@ def search_room(request):
         return render(request, "booking/search_room.html")
 
 def book_room(request, room_id):
-    if request.method == "POST":
-        name = request.POST.get('name')
-        surname = request.POST.get('surname')
-        email = request.POST.get('email')
-        start_time = request.POST.get('start_time')
-        end_time = request.POST.get('end_time')
-        room = Room.objects.get(id=room_id)
-        room.available = False
-        room.save()
-        try:
-            user = User.objects.get(name=name, surname=surname, email=email)
-        except User.DoesNotExist:
-            user = User(name=name, surname=surname, email=email)
-            user.save()
-        booking = Booking.objects.create(user=user, room=room, start_time=start_time,end_time=end_time)
-        
-        return redirect("booking-info", pk = booking.id)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            start_time = request.POST.get('start_time')
+            end_time = request.POST.get('end_time')
+            room = Room.objects.get(id=room_id)
+            room.available = False
+            room.save()
+            user = request.user
+            booking = Booking.objects.create(user=user, room=room, start_time=start_time,end_time=end_time)
+            
+            return redirect("booking-info", pk = booking.id)
+        else:
+            context = {"room": Room.objects.get(id=room_id)}
+            return render(request, template_name="booking/book_room.html", context=context)
     else:
-        context = {"room": Room.objects.get(id=room_id)}
-        return render(request, template_name="booking/book_room.html", context=context)
+        return redirect("login")
 
 def show_booking_details(request, pk):
     try:
@@ -77,20 +79,45 @@ def show_booking_details(request, pk):
             "Booking doesn't exist!",
             status=404
         )
-    
-def sign_in(request):
-    if request.method == "POST":
-        name = request.POST.get('sign-in-name')
-        surname = request.POST.get('sign-in-surname')
-        email = request.POST.get('sign-in-email')
-        try:
-            user = User.objects.get(name=name, surname=surname, email=email)
-        except User.DoesNotExist:
-            user = User(name=name, surname=surname, email=email)
-            user.save()
-        return redirect("user-info", pk=user.id)
+
+def register_user(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        name = request.POST.get('first_name')
+        surname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        new_user = User.objects.create_user(username=username, first_name=name, last_name=surname, email=email, password=password)
+        new_user.save()
+        user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
+        login(request, user)
+
+        return redirect("index")
     else:
-        return render(request, "booking/authentication.html")
+        return render(request, "booking/register.html")
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get('password')
+
+        user = authenticate(username=username,password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect("index")
+        else:
+            messages.success(request, ("There was an error logging in, try again!"))
+            return redirect("login")
+        
+    else:
+        return render(request, "booking/login.html")
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You were logged out"))
+    return redirect("index")
 
 def user_info(request, pk):
     try:

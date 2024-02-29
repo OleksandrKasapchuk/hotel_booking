@@ -4,7 +4,9 @@
 
 <ul>
     {% for room in rooms %}
-        <li><a href="{% url 'room-details' room.id %}">{{ room }}</a></li>
+        {% if room.available %}
+            <li><a href="{% url 'room-details' room.id %}">{{ room }}</a></li>
+        {% endif %}
     {% endfor %}
 </ul>
 {% endblock %}

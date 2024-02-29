@@ -1,0 +1,16 @@
+{% extends "booking/base.html" %}
+
+
+{% block main %}
+    <h1>Login</h1>
+    <br>
+    <form method="POST" action="{% url 'login'  %}">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="username">
+        <br>
+        <input type="password" id="password" name="password" placeholder="password">
+        <br>
+        <a href="{% url 'register' %}">Don't have an account?</a>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
