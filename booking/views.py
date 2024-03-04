@@ -20,6 +20,8 @@ def hotel_info(request):
 
 def show_rooms(request):
     context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
+    for booking in Booking.objects.all():
+        booking.room_available()
     return render(
         request,
         template_name="booking/rooms.html",
@@ -106,6 +108,7 @@ def login_user(request):
         
         if user is not None:
             login(request, user)
+            messages.success(request, ("You have been succesfully logged in"))
             return redirect("index")
         else:
             messages.success(request, ("There was an error logging in, try again!"))
@@ -122,7 +125,8 @@ def logout_user(request):
 def user_info(request, pk):
     try:
         user = User.objects.get(id=pk)
-        context = {'user': user}
+        bookings = Booking.objects.all()
+        context = {'user': user, "bookings": bookings}
         return render(request, 'booking/user_info.html', context=context)
     except User.DoesNotExist:
         return HttpResponse (

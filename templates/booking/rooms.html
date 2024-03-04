@@ -5,7 +5,7 @@
 <ul>
     {% for room in rooms %}
         {% if room.available %}
-            <li><a href="{% url 'room-details' room.id %}">{{ room }}</a></li>
+            <li><a href="{% url 'room-details' room.id %}" class="link-info">{{ room }}</a></li>
         {% endif %}
     {% endfor %}
 </ul>
