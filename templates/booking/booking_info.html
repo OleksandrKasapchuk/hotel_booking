@@ -1,7 +1,8 @@
 {% extends "booking/base.html" %}
 
 {% block main %}
-<h1>Room {{ booking.room.number }}</h1>
+<h1>Booking informations</h1>
+<h2>Room: {{ booking.room.number }}</h2>
 <h2>Capacity: {{ booking.room.capacity }} </h2>
 <h3>Location: {{ booking.room.location }} </h3>
 <h2>Name: {{booking.user.first_name}} </h2>

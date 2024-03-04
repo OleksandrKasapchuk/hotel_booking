@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import *
 from django.contrib.auth.models import User
+from datetime import date
 
 
 class Room(models.Model):
@@ -25,6 +26,13 @@ class Booking(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     creation_time = models.DateTimeField(auto_now_add=True)
+
+    def room_available(self):
+        ending = self.end_time.date()
+        now = date.today()
+        if ending <= now:
+            self.room.available = True
+            self.room.save()
     
     class Meta:
         verbose_name = "Booking"

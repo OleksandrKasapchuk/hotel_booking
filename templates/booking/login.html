@@ -4,13 +4,13 @@
 {% block main %}
     <h1>Login</h1>
     <br>
-    <form method="POST" action="{% url 'login'  %}">
+    <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
-        <input type="text" id="username" name="username" placeholder="username">
+        <input type="text" id="username" name="username" placeholder="username" class="login-form-item">
         <br>
-        <input type="password" id="password" name="password" placeholder="password">
+        <input type="password" id="password" name="password" placeholder="password" class="login-form-item">
         <br>
-        <a href="{% url 'register' %}">Don't have an account?</a>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button><br>
+        <a href="{% url 'register' %}">Do not have any account?</a>
     </form>
 {% endblock %}
