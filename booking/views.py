@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from booking.models import *
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
@@ -41,15 +42,15 @@ def search_room(request):
         room_capacity = request.POST.get("room-capacity")
         try:
             rooms = Room.objects.filter(capacity=room_capacity)
+            context = {"rooms":rooms}
         except ValueError:
-            return HttpResponse("Invalid value for room-capacity!", status=400)
-
-        context = {"rooms":rooms}
+            messages.success(request, ("Invalid value for room-capacity!"))
+            context = {}
         return render(
             request,
             "booking/filter_rooms.html",
             context=context
-        )          
+            )       
     else:
         return render(request, "booking/search_room.html")
 
@@ -63,7 +64,6 @@ def book_room(request, room_id):
             room.save()
             user = request.user
             booking = Booking.objects.create(user=user, room=room, start_time=start_time,end_time=end_time)
-            
             return redirect("booking-info", pk = booking.id)
         else:
             context = {"room": Room.objects.get(id=room_id)}
@@ -133,3 +133,44 @@ def user_info(request, pk):
             "User doesn't exist!",
             status=404
         )
+
+def edit_user(request, user_id):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        name = request.POST.get('first_name')
+        surname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        user = User.objects.get(id=user_id)
+        user.username=username 
+        user.email=email
+        user.password=password
+        user.first_name=name
+        user.last_name=surname
+        user.save()
+
+        return redirect(f"/user-info/{user_id}")
+    else:
+        return render(request, "booking/edit_user.html")
+
+def change_password(request, user_id):
+    if request.method == 'POST':
+        user = User.objects.get(id=user_id)
+        password = request.POST.get('password')
+        new_password = request.POST.get('new_password1')
+        new_password2 = request.POST.get('new_password2')
+        validated = check_password(password, user.password)
+        if validated:
+            if new_password == new_password2:
+                user.password= make_password(password)
+                user.save()
+            else:
+                messages.success(request, ("Passwords do not match"))
+                return redirect(f'/change-password/{user_id}')
+        else:
+            messages.success(request, ("Incorrect password"))
+            return redirect(f'/change-password/{user_id}')
+        return redirect(f"/user-info/{user_id}")
+    else:
+        return render(request, "booking/change_password.html")
