@@ -2,7 +2,8 @@ from django.db import models
 from datetime import *
 from django.contrib.auth.models import User
 from datetime import date
-
+import calendar
+from calendar import HTMLCalendar
 
 class Room(models.Model):
     number = models.IntegerField()
@@ -18,7 +19,6 @@ class Room(models.Model):
 
     def __str__(self):
         return f"Room #{self.number} for {self.capacity}"
-
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookings")

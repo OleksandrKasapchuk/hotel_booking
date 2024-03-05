@@ -7,14 +7,13 @@
     <li>Username: {{user.username}}</li><br>
     <li>Name: {{user.first_name}}</li><br>
     <li>Surname: {{user.last_name}}</li><br>
-    <li>Email: {{user.email}}</li>
+    <li>Email: {{user.email}}</li><br>
+    <a href="{% url 'edit-user' user.id %}" class="link-info">Edit profile</a>
 </ul>
 <h2>Your bookings:</h2>
 <ul>
-    {% for booking in bookings %}
-        {% if user == booking.user %}
-            <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li><br>
-        {% endif %}
+    {% for booking in user.bookings.all %}
+        <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li><br>
     {% endfor %}
 </ul>
 {% endblock %}

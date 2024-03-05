@@ -66,6 +66,7 @@ main {
     margin: 0 0 0 100px;
     font-size: 1.5rem;
     height: 80vh;
+    color:white;
 }
 main > ul > li {
     display: inline-block;
