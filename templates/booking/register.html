@@ -3,18 +3,17 @@
 
 {% block main %}
     <h1>Register</h1>
-    <br>
     <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-        <input type="text" id="username" name="username" placeholder="username">
+        <input type="text" id="username" name="username" placeholder="username" class="register-form-item">
         <br>
-        <input type="text" id="first_name" name="first_name" placeholder="first name">
+        <input type="text" id="first_name" name="first_name" placeholder="first name" class="register-form-item">
         <br>
-        <input type="text" id="last_name" name="last_name" placeholder="last name">
+        <input type="text" id="last_name" name="last_name" placeholder="last name" class="register-form-item">
         <br>
-        <input type="email" id="email" name="email" placeholder="email">
+        <input type="email" id="email" name="email" placeholder="email" class="register-form-item">
         <br>
-        <input type="password" id="password" name="password" placeholder="password">
+        <input type="password" id="password" name="password" placeholder="password" class="register-form-item">
         <br>
         <button type="submit">Submit</button>
     </form>

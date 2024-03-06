@@ -3,7 +3,6 @@
 
 {% block main %}
     <h1>Login</h1>
-    <br>
     <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
         <input type="text" id="username" name="username" placeholder="username" class="login-form-item">

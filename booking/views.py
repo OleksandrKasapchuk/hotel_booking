@@ -163,8 +163,10 @@ def change_password(request, user_id):
         validated = check_password(password, user.password)
         if validated:
             if new_password == new_password2:
-                user.password= make_password(password)
+                user.set_password(new_password)
                 user.save()
+                login(request, user)
+                messages.success(request, ("Password has been changed"))
             else:
                 messages.success(request, ("Passwords do not match"))
                 return redirect(f'/change-password/{user_id}')
