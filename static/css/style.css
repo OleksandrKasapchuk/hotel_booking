@@ -70,6 +70,11 @@ main {
     height: 80vh;
     color:white;
 }
+section {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
 main > ul > li {
     display: inline-block;
     font-size: 24px;
@@ -78,6 +83,9 @@ main > ul > li {
 }
 main form {
     text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 footer {
     height: 30vh;
@@ -86,9 +94,37 @@ footer {
 input {
     font-size: 14px;
 }
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.input-wrapper label {
+    align-self: start;
+    font-weight: 700;
+}
+.login-form, .register-form, .edit-user-form, .change-password-form {
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
 .login-form-item, .register-form-item {
     font-size: inherit;
     margin: 5px;
+    width: 350px;
+    color: white;
+    border: solid black;
+    border-width: 0 0 3px 0;
+    background-color: rgba(0, 0, 0, 0.0);
+    background: transparent;
+}
+.login-form-item, .register-form-item:focus {
+    outline: none;
+}
+.btn-secondary {
+    background-color: gray;
+    border-radius: 10px;
+    width: 250px;
+    height: 50px;
+    margin: 10px;
 }
 .capacity-form {
     position: relative;

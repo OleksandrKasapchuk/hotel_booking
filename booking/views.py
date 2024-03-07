@@ -83,39 +83,46 @@ def show_booking_details(request, pk):
         )
 
 def register_user(request):
-    if request.method == 'POST':
-        username = request.POST.get("username")
-        name = request.POST.get('first_name')
-        surname = request.POST.get('last_name')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        
-        new_user = User.objects.create_user(username=username, first_name=name, last_name=surname, email=email, password=password)
-        new_user.save()
-        user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
-        login(request, user)
-
+    if request.user.is_authenticated:
         return redirect("index")
     else:
-        return render(request, "booking/register.html")
-
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get('password')
-
-        user = authenticate(username=username,password=password)
-        
-        if user is not None:
+        if request.method == 'POST':
+            username = request.POST.get("username")
+            name = request.POST.get('first_name')
+            surname = request.POST.get('last_name')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            
+            new_user = User.objects.create_user(username=username, first_name=name, last_name=surname, email=email, password=password)
+            new_user.save()
+            user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
             login(request, user)
-            messages.success(request, ("You have been succesfully logged in"))
+
             return redirect("index")
         else:
-            messages.success(request, ("There was an error logging in, try again!"))
-            return redirect("login")
-        
+            return render(request, "booking/register.html")
+
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect("index")
     else:
-        return render(request, "booking/login.html")
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get('password')
+
+            user = authenticate(username=username,password=password)
+            
+            if user is not None:
+                login(request, user)
+                messages.success(request, ("You have been succesfully logged in"))
+                return redirect("index")
+            else:
+                messages.success(request, ("There was an error logging in, try again!"))
+                return redirect("login")
+            
+        else:
+            return render(request, "booking/login.html")
+        
 
 def logout_user(request):
     logout(request)
