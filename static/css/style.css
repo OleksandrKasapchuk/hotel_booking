@@ -102,11 +102,11 @@ input {
     align-self: start;
     font-weight: 700;
 }
-.login-form, .register-form, .edit-user-form, .change-password-form {
+.login-form, .register-form, .edit-user-form, .change-password-form, .book-room-form {
     width: 500px;
     background-color: rgba(0, 0, 0, 0.2);
 }
-.login-form-item, .register-form-item {
+.login-form-item, .register-form-item, .change-password-form-item, .book-form-item {
     font-size: inherit;
     margin: 5px;
     width: 350px;
@@ -116,7 +116,7 @@ input {
     background-color: rgba(0, 0, 0, 0.0);
     background: transparent;
 }
-.login-form-item, .register-form-item:focus {
+.login-form-item, .register-form-item, .change-password-form, .book-room-form:focus {
     outline: none;
 }
 .btn-secondary {

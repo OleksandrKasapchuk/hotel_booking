@@ -2,14 +2,22 @@
 
 
 {% block main %}
-    <h1>Booking the room {{room.number}}</h1>
-    <form method="POST" action="{% url 'book-room' room.id %}">
-    {% csrf_token %}
-        <input type="text" id="start_time" name="start_time" placeholder="start time">
-        <br>
-        <input type="text" id="end_time" name="end_time" placeholder="end time">
-        <br>
-        <input type="hidden" name="room" value="{{room.id}}">
-        <button type="submit" class="submit-button">Submit</button>
-    </form>
+    <section>
+        <form method="POST" action="{% url 'book-room' room.id %}" class="book-room-form">
+            <h1>Booking the room {{room.number}}</h1>
+            {% csrf_token %}
+            <fieldset class="input-wrapper">
+                <label for="start_time">Start time</label>
+                <input type="text" id="start_time" name="start_time" class="book-form-item">
+            </fieldset>
+            <br>
+            <fieldset class="input-wrapper">
+                <label for="end_time">End time</label>
+                <input type="text" id="end_time" name="end_time" class="book-form-item">
+            </fieldset>
+            <br>
+            <input type="hidden" name="room" value="{{room.id}}">
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </section>
 {% endblock %}
