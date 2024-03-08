@@ -22,7 +22,7 @@ def hotel_info(request):
 def show_rooms(request):
     context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
     for booking in Booking.objects.all():
-        booking.room_available()
+        booking.is_active()
     return render(
         request,
         template_name="booking/rooms.html",
@@ -43,6 +43,8 @@ def search_room(request):
         try:
             rooms = Room.objects.filter(capacity=room_capacity)
             context = {"rooms":rooms}
+            for booking in Booking.objects.all():
+                booking.is_active()
         except ValueError:
             messages.success(request, ("Invalid value for room-capacity!"))
             context = {}

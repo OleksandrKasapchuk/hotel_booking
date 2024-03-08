@@ -27,13 +27,15 @@ class Booking(models.Model):
     end_time = models.DateTimeField()
     creation_time = models.DateTimeField(auto_now_add=True)
 
-    def room_available(self):
+    def is_active(self):
         ending = self.end_time.date()
         now = date.today()
         if ending <= now:
             self.room.available = True
             self.room.save()
-    
+            return False
+        else:
+            return True
     class Meta:
         verbose_name = "Booking"
         verbose_name_plural = "Bookings"
