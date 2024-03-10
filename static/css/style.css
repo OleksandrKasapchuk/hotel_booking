@@ -22,17 +22,23 @@ p, h4 {
 ul {
     padding: 0;
 }
-.hotel-info {
-    font-size: 1.5rem;
+.hotel-info-heading {
+    font-size: 3rem;
     font-weight: 600;
+}
+.hotel-info-text {
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 body {
     background-image: url("/static/images/hotel_back.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    height: 100vh;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* height: 100vh; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 nav {
     box-shadow: -5px 0 0 5px rgb(0,0,0,0.1);
@@ -65,10 +71,18 @@ nav a {
 nav a:hover {
     background-color: gray;
 }
+.header-index {
+    background-image: url("/static/images/hotel_image2.jpg");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 30vh;
+}
 main {
     font-size: 1.5rem;
     height: 80vh;
+    width: 60vw;
     color:white;
+    align-self: center;
 }
 section {
     display: flex;
@@ -113,7 +127,6 @@ input {
     color: white;
     border: solid black;
     border-width: 0 0 3px 0;
-    background-color: rgba(0, 0, 0, 0.0);
     background: transparent;
 }
 .login-form-item, .register-form-item, .change-password-form, .book-room-form:focus {
