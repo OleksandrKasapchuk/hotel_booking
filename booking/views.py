@@ -4,9 +4,11 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 def index(request):
+    context = {"reviews": Review.objects.all()}
     return render(
         request,
-        "booking/index.html"
+        "booking/index.html",
+        context=context
     )
 
 def hotel_info(request):
