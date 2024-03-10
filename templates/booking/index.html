@@ -7,11 +7,23 @@
 	<p class="hotel-info-text">Experience the essence of Ukraine's hospitality at our chain of hotels. From vibrant cityscapes to serene countryside, each stay promises a perfect blend of comfort and local charm. Indulge in authentic cuisine, explore cultural treasures, and make unforgettable memories with us.</p>
 </header>
 
-<article class="reviews">
-	{% for review in reviews %}
-		<h2> {{review.user}} </h2>
-		<h3> {{review.mark}} </h3>
-		<p> {{review.text}} </p>
-	{% endfor %}
-</article>
+<section class="review-container">
+	<form method="POST" action="{% url 'index' %}" class="review-form">
+		{% csrf_token %}
+		<label for="review-mark">Your mark</label>
+		<input type="number" name="review-mark">
+		<label for="review-text">Your text:</label>
+		<input type="text" name="review-text">
+		<button type="submit" class="btn btn-secondary">Send</button>
+	</form>
+	<article class="row row-cols-4">
+		{% for review in reviews %}
+			<section class="col">
+				<h2> {{review.user}} </h2>
+				<h3> {{review.mark}} </h3>
+				<p> {{review.text}} </p>
+			</section>
+		{% endfor %}
+	</article>
+</section>
 {% endblock %}
