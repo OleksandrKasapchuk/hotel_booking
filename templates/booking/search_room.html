@@ -1,4 +1,4 @@
-<form method="POST" action="{% url search-room %}" class="formality">
+<form method="POST" action="{% url 'search-rooms' %}" class="formality">
     {% csrf_token %}
     <label for="city">City:</label>
     <select name="city">

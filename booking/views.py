@@ -50,10 +50,11 @@ def search_rooms(request):
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
         try:
-            rooms = Room.objects.filter(capacity=guests)
+            rooms = Room.objects.filter(capacity=guests, hotel=hotel)
             context = {"rooms":rooms}
-            for booking in Booking.objects.all():
-                booking.is_active()
+
+            '''for booking in Booking.objects.all():
+                booking.is_active()'''
         except ValueError:
             messages.success(request, ("Invalid value for room-capacity!"))
             context = {}
