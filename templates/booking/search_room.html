@@ -1,24 +1,24 @@
-<form method="POST" action="" class="formality">
+<form method="POST" action="{% url 'search-rooms' %}" class="formality">
     {% csrf_token %}
-    <p>City:</p>
-    <select name="misto">
+    <label for="city">City:</label>
+    <select name="city">
         <option disabled="disabled" selected="selected"></option>
-        <option>Київ</option>
-        <option>Тернопіль</option>
-        <option>Франик</option>
+        <option value=1>Kyiv</option>
+        <option value=2>Ternopil</option>
+        <option value=3>Ivano-Frankivsk</option>
     </select>
-    <p>Number of guests:</p>
+    <label for="human_amount">Number of guests:</label>
     <select name="human_amount">
         <option disabled="disabled" selected="selected"></option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4+</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
     </select>
-    <p>From:</p>
-    <input type="date" name="date">
-    <p>To:</p>
-    <input type="date" name="date">
+    <label for="startdate">From:</label>
+    <input type="date" name="start_date">
+    <label for="enddate">To:</label>
+    <input type="date" name="enddate" min=startdate.value>
     <button type="submit">Submit</button>
 </form>
     

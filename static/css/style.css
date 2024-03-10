@@ -35,7 +35,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    /* height: 100vh; */
     font-family: Georgia, 'Times New Roman', Times, serif;
     display: flex;
     flex-direction: column;
@@ -85,6 +84,7 @@ nav a:hover {
 main {
     font-size: 1.5rem;
     width: 60vw;
+    height: 80vh;
     color:white;
     align-self: center;
 }
@@ -105,11 +105,11 @@ main form {
     display: flex;
     align-items: center;
     flex-direction: column;
+    height: 100%;
 }
 footer {
     height: 30vh;
     background-color: rgb(98, 94, 94);
-    margin-top: 100px;
 }
 input {
     font-size: 14px;
@@ -209,7 +209,6 @@ input {
 }
 
 .formality {
-    display: flex;
     flex-direction: row;
     background-color: rgba(116, 126, 159, 0.52);
     border: 3px dashed rgba(15, 18, 26, 0.927);

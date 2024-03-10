@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from booking.models import *
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     if request.method == 'POST':
@@ -42,14 +43,18 @@ def get_room(request, room_id):
         context=context
     )
 
-def search_room(request):
+def search_rooms(request):
     if request.method == "POST":
-        room_capacity = request.POST.get("room-capacity")
+        hotel = request.POST.get("city")
+        guests = request.POST.get("human_amount")
+        start_date = request.POST.get("start_date")
+        end_date = request.POST.get("end_date")
         try:
-            rooms = Room.objects.filter(capacity=room_capacity)
+            rooms = Room.objects.filter(capacity=guests, hotel=hotel)
             context = {"rooms":rooms}
-            for booking in Booking.objects.all():
-                booking.is_active()
+
+            '''for booking in Booking.objects.all():
+                booking.is_active()'''
         except ValueError:
             messages.success(request, ("Invalid value for room-capacity!"))
             context = {}
@@ -60,6 +65,7 @@ def search_room(request):
             )       
     else:
         return render(request, "booking/search_room.html")
+    
 
 def book_room(request, room_id):
     if request.user.is_authenticated:
