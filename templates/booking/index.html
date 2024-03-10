@@ -7,6 +7,8 @@
 	<p class="hotel-info-text">Experience the essence of Ukraine's hospitality at our chain of hotels. From vibrant cityscapes to serene countryside, each stay promises a perfect blend of comfort and local charm. Indulge in authentic cuisine, explore cultural treasures, and make unforgettable memories with us.</p>
 </header>
 
+<nav>{% include "booking/search_room.html" %}</nav>
+
 <section class="review-container">
 	<form method="POST" action="{% url 'index' %}" class="review-form">
 		{% csrf_token %}
