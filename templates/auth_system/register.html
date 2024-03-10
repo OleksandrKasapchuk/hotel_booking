@@ -1,12 +1,11 @@
-{% extends "booking/base.html" %}
+{% extends "base.html" %}
 
 
 {% block main %}
     <section>
         <form method="POST" action="{% url 'register' %}" class="register-form">
-            <h1>Register</h1> 
             {% csrf_token %}
-            
+            <h1>Register</h1> 
             <fieldset class="input-wrapper">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" class="register-form-item">

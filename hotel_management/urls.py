@@ -20,6 +20,6 @@ import booking.views as booking_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', booking_views.index),
-    path('', include('booking.urls'))
+    path('', include('booking.urls')),
+	path('', include('auth_system.urls'))
 ]
