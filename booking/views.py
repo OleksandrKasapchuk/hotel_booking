@@ -4,10 +4,19 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 def index(request):
-    return render(
-        request,
-        "booking/index.html"
-    )
+    if request.method == 'POST':
+        user = request.user
+        mark = request.POST.get("review-mark")
+        text = request.POST.get("review-text")
+        Review.objects.create(user=user, mark=mark, text=text)
+        return redirect('index')
+    else:
+        context = {"reviews": Review.objects.all()}
+        return render(
+            request,
+            "booking/index.html",
+            context=context
+        )
 
 def hotel_info(request):
     return render(
