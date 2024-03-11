@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-
 {% block main %}
+<main>
     <section class="form-container">
         <form method="POST" action="{% url 'login' %}" class="login-form">
             <h1>Login</h1>
@@ -18,4 +18,5 @@
             <a href="{% url 'register' %}" class="link-info">Do not have any account?</a>
         </form>
     </section>
+</main>
 {% endblock %}

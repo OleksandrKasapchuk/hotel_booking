@@ -16,9 +16,10 @@ def register_user(request):
             name = request.POST.get('first_name')
             surname = request.POST.get('last_name')
             email = request.POST.get('email')
+            phone_number = request.POST.get('tel')
             password = request.POST.get('password')
             
-            new_user = CustomUser.objects.create_user(username=username, first_name=name, last_name=surname, email=email, password=password)
+            new_user = CustomUser.objects.create_user(username=username, first_name=name, last_name=surname, email=email, phone_number=phone_number,password=password)
             new_user.save()
             user = authenticate(username=username, first_name=name, last_name=surname, email=email, password=password)
             login(request, user)
@@ -63,7 +64,7 @@ def user_info(request, pk):
             return render(request, 'auth_system/user_info.html', context=context)
         except CustomUser.DoesNotExist:
             return HttpResponse (
-                "CustomUser doesn't exist!",
+                "User doesn't exist!",
                 status=404
             )
     else:
@@ -84,7 +85,7 @@ def edit_user(request, user_id):
             user.last_name=surname
             user.save()
 
-            messages.success(request, "CustomUser info has been updated")
+            messages.success(request, "Profile info has been updated")
             return redirect(f"/user-info/{user_id}")
         else:
             return render(request, "auth_system/edit_user.html")

@@ -31,9 +31,10 @@ ul {
     font-weight: 400;
 }
 body {
-    background-image: url("/static/images/hotel_back.jpg");
+    /* background-image: url("/static/images/hotel_back.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+    background-color:bisque;
     width: 100%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     display: flex;
@@ -77,9 +78,7 @@ nav a:hover {
     height: 30vh;
 }
 .review-container {
-    display: grid;
-    grid-template-columns: 2fr;
-    grid-template-rows: 2fr;
+    margin-top: 50vh;
 }
 main {
     font-size: 1.5rem;
@@ -87,6 +86,11 @@ main {
     height: 80vh;
     color:white;
     align-self: center;
+    box-shadow: 0px 0px 10px black;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.main-index {
+    height:auto;
 }
 .form-container {
     display: flex;
@@ -138,36 +142,16 @@ input {
 .login-form-item, .register-form-item, .change-password-form, .book-room-form:focus {
     outline: none;
 }
+.review-form {
+    flex-direction: row;
+    gap: 10px;
+}
 .btn-secondary {
     background-color: gray;
     border-radius: 10px;
     width: 250px;
     height: 50px;
     margin: 10px;
-}
-.capacity-form {
-    position: relative;
-    display: flex;
-    height: 100%;
-    width: 225px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
-}
-#room-capacity {
-    height: 60%;
-    width: 100%;
-    border: 0;
-}
-#room-capacity::placeholder {
-    font-size: 14px;
-}
-.button-search {
-    position: absolute;
-    top: 13px;
-    background: none;
-    border: 0;
-    font-size: 14px;
 }
 .sidebar {
     position: fixed;
