@@ -2,30 +2,33 @@
 
 
 {% block main %}
-<header class="header-index">
-	<h2 class="hotel-info-heading">Five stars hotel chain  "Tashkent"</h2>
-	<p class="hotel-info-text">Experience the essence of Ukraine's hospitality at our chain of hotels. From vibrant cityscapes to serene countryside, each stay promises a perfect blend of comfort and local charm. Indulge in authentic cuisine, explore cultural treasures, and make unforgettable memories with us.</p>
-</header>
-
-<nav>{% include "booking/search_room.html" %}</nav>
-
-<section class="review-container">
-	<form method="POST" action="{% url 'index' %}" class="review-form">
-		{% csrf_token %}
-		<label for="review-mark">Your mark</label>
-		<input type="number" name="review-mark">
-		<label for="review-text">Your text:</label>
-		<input type="text" name="review-text">
-		<button type="submit" class="btn btn-secondary">Send</button>
-	</form>
-	<article class="row row-cols-4">
-		{% for review in reviews %}
-			<section class="col">
-				<h2> {{review.user}} </h2>
-				<h3> {{review.mark}} </h3>
-				<p> {{review.text}} </p>
-			</section>
-		{% endfor %}
-	</article>
-</section>
+<main class="main-index">
+	<header class="header-index">
+		<h2 class="hotel-info-heading">Five stars hotel chain  "Tashkent"</h2>
+		<p class="hotel-info-text">Experience the essence of Ukraine's hospitality at our chain of hotels. From vibrant cityscapes to serene countryside, each stay promises a perfect blend of comfort and local charm. Indulge in authentic cuisine, explore cultural treasures, and make unforgettable memories with us.</p>
+	</header>
+	
+	<nav>{% include "booking/search_room.html" %}</nav>
+	
+	<section class="review-container">
+		<h2>Reviews</h2>
+		<form method="POST" action="{% url 'index' %}" class="review-form">
+			{% csrf_token %}
+			<label for="review-mark">Your mark</label>
+			<input type="number" name="review-mark" min=1 max=5>
+			<label for="review-text">Your text:</label>
+			<input type="text" name="review-text">
+			<button type="submit" class="btn btn-secondary">Send</button>
+		</form>
+		<article class="row row-cols-4">
+			{% for review in reviews %}
+				<section class="col">
+					<h2> {{review.user}} </h2>
+					<h3> {{review.mark}} </h3>
+					<p> {{review.text}} </p>
+				</section>
+			{% endfor %}
+		</article>
+	</section>
+</main>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 
 {% block main %}
+<main>
     <section>
         <form method="POST" action="{% url 'book-room' room.id %}" class="book-room-form">
             <h1>Booking the room {{room.number}}</h1>
@@ -20,4 +21,5 @@
             <button type="submit" class="btn btn-secondary">Submit</button>
         </form>
     </section>
+</main>
 {% endblock %}

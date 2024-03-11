@@ -1,30 +1,31 @@
 {% extends "base.html" %}
 
-
 {% block main %}
-<h1>User profile</h1>
-<ul class="user_infos">
-    <li>Username: {{user.username}}</li><br>
-    <li>Name: {{user.first_name}}</li><br>
-    <li>Surname: {{user.last_name}}</li><br>
-    <li>Email: {{user.email}}</li><br>
-    <li>Phone number: {{user.phone_number}}</li><br>
-    <li><a href="{% url 'edit-user' user.id %}" class="link-info">Edit profile</a></li>
-</ul>
-<h2 class="user_bookings_heading">Active bookings:</h2>
-<ul class="user_bookings">
-    {% for booking in user.bookings.all %}
-        {% if booking.is_active %}
-        <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<h2 class="user_bookings_heading">Past bookings:</h2>
-<ul class="user_bookings">
-    {% for booking in user.bookings.all %}
-        {% if not booking.is_active %}
-        <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>
+<main>
+    <h1>User profile</h1>
+    <ul class="user_infos">
+        <li>Username: {{user.username}}</li><br>
+        <li>Name: {{user.first_name}}</li><br>
+        <li>Surname: {{user.last_name}}</li><br>
+        <li>Email: {{user.email}}</li><br>
+        <li>Phone number: {{user.phone_number}}</li><br>
+        <li><a href="{% url 'edit-user' user.id %}" class="link-info">Edit profile</a></li>
+    </ul>
+    <h2 class="user_bookings_heading">Active bookings:</h2>
+    <ul class="user_bookings">
+        {% for booking in user.bookings.all %}
+            {% if booking.is_active %}
+            <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <h2 class="user_bookings_heading">Past bookings:</h2>
+    <ul class="user_bookings">
+        {% for booking in user.bookings.all %}
+            {% if not booking.is_active %}
+            <li><a href="{% url 'booking-info' booking.id %}" class="link-info">{{booking.room}}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</main>
 {% endblock %}

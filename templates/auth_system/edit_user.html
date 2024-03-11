@@ -1,28 +1,34 @@
 {% extends "base.html" %}
 
 {% block main %}
-<section class="form-container">
-    <form method="POST" action="{% url 'edit-user' user.id %}" class="edit-user-form">
-        {% csrf_token %}
-        <h1>Edit profile</h1>
-        <fieldset class="input-wrapper">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" class="register-form-item" value="{{user.username}}">
-        </fieldset>
-        <fieldset class="input-wrapper">
-            <label for="first_name">Name</label>
-            <input type="text" id="first_name" name="first_name" class="register-form-item" value="{{user.first_name}}">
-        </fieldset>
-        <fieldset class="input-wrapper">
-            <label for="last_name">Surname</label>
-            <input type="text" id="last_name" name="last_name" class="register-form-item" value="{{user.last_name}}">
-        </fieldset>
-        <fieldset class="input-wrapper">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="register-form-item" value="{{user.email}}"">
-        </fieldset>
-        <a href="{% url 'change-password' user.id %}" class="link-info">Change password</a>
-        <button type="submit"class="btn btn-secondary">Submit</button>
-    </form>
-</section>
+<main>
+    <section class="form-container">
+        <form method="POST" action="{% url 'edit-user' user.id %}" class="edit-user-form">
+            {% csrf_token %}
+            <h1>Edit profile</h1>
+            <fieldset class="input-wrapper">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="register-form-item" value="{{user.username}}">
+            </fieldset>
+            <fieldset class="input-wrapper">
+                <label for="first_name">Name</label>
+                <input type="text" id="first_name" name="first_name" class="register-form-item" value="{{user.first_name}}">
+            </fieldset>
+            <fieldset class="input-wrapper">
+                <label for="last_name">Surname</label>
+                <input type="text" id="last_name" name="last_name" class="register-form-item" value="{{user.last_name}}">
+            </fieldset>
+            <fieldset class="input-wrapper">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="register-form-item" value="{{user.email}}"">
+            </fieldset>
+            <fieldset class="input-wrapper">
+                <label for="tel">Phone number</label>
+                <input type="tel" name="tel" class="register-form-item" value="{{user.phone_number}}"">
+            </fieldset>
+            <a href="{% url 'change-password' user.id %}" class="link-info">Change password</a>
+            <button type="submit"class="btn btn-secondary">Submit</button>
+        </form>
+    </section>
+</main>
 {% endblock %}

@@ -12,7 +12,7 @@ def index(request):
         Review.objects.create(user=user, mark=mark, text=text)
         return redirect('index')
     else:
-        context = {"reviews": Review.objects.all()}
+        context = {"reviews": Review.objects.all()[:8]}
         return render(
             request,
             "booking/index.html",
