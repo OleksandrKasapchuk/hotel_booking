@@ -27,8 +27,8 @@ def hotel_info(request):
 
 def show_rooms(request):
     context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
-    for booking in Booking.objects.all():
-        booking.is_active()
+    '''for booking in Booking.objects.all():
+        booking.is_active()'''
     return render(
         request,
         template_name="booking/rooms.html",
@@ -51,7 +51,7 @@ def search_rooms(request):
         end_date = request.POST.get("end_date")
         try:
             rooms = Room.objects.filter(capacity=guests, hotel=hotel)
-            context = {"rooms":rooms}
+            context = {"rooms":rooms, "start": start_date, "end": end_date}
 
             '''for booking in Booking.objects.all():
                 booking.is_active()'''
@@ -64,19 +64,19 @@ def search_rooms(request):
             context=context
             )       
     else:
-        return render(request, "booking/search_room.html")
+        return render(request, "booking/rooms.html")
     
 
 def book_room(request, room_id):
     if request.user.is_authenticated:
         if request.method == "POST":
-            start_time = request.POST.get('start_time')
-            end_time = request.POST.get('end_time')
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
             room = Room.objects.get(id=room_id)
             room.available = False
             room.save()
             user = request.user
-            booking = Booking.objects.create(user=user, room=room, start_time=start_time,end_time=end_time)
+            booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
             return redirect("booking-info", pk = booking.id)
         else:
             context = {"room": Room.objects.get(id=room_id)}

@@ -23,8 +23,8 @@
                 <input type="email" id="email" name="email" class="register-form-item" value="{{user.email}}"">
             </fieldset>
             <fieldset class="input-wrapper">
-                <label for="tel">Phone number</label>
-                <input type="tel" name="tel" class="register-form-item" value="{{user.phone_number}}"">
+                <label for="phone_number">Phone number</label>
+                <input type="tel" name="phone_number" class="register-form-item" value="{{user.phone_number}}">
             </fieldset>
             <a href="{% url 'change-password' user.id %}" class="link-info">Change password</a>
             <button type="submit"class="btn btn-secondary">Submit</button>

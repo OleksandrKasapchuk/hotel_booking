@@ -59,8 +59,7 @@ def user_info(request, pk):
     if request.user.id == pk:
         try:
             user = CustomUser.objects.get(id=pk)
-            bookings = Booking.objects.all()
-            context = {'user': user, "bookings": bookings}
+            context = {'user': user}
             return render(request, 'auth_system/user_info.html', context=context)
         except CustomUser.DoesNotExist:
             return HttpResponse (
@@ -77,12 +76,14 @@ def edit_user(request, user_id):
             name = request.POST.get('first_name')
             surname = request.POST.get('last_name')
             email = request.POST.get('email')
-            
+            phone_number = request.POST.get('phone_number')
+
             user = CustomUser.objects.get(id=user_id)
             user.username=username 
             user.email=email
             user.first_name=name
             user.last_name=surname
+            user.phone_number=phone_number
             user.save()
 
             messages.success(request, "Profile info has been updated")
