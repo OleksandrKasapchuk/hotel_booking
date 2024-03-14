@@ -44,9 +44,9 @@ class Booking(models.Model):
     creation_date = models.DateField(auto_now_add=True)
 
     def is_active(self):
-        ending = self.end_time.date()
+        # ending = self.end_date.date()
         now = date.today()
-        if ending <= now:
+        if self.end_date <= now:
             self.room.available = True
             self.room.save()
             return False
