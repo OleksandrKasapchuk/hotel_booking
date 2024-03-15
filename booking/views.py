@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from booking.models import *
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from .forms import *
+from random import randint
 
 def index(request):
     if request.method == 'POST':
@@ -18,79 +19,45 @@ def index(request):
             "booking/index.html",
             context=context
         )
-
-def hotel_info(request):
-    return render(
-        request,
-        "booking/hotel_info.html"
-    )
-
-def show_rooms(request):
-    context = {"rooms": Room.objects.all(), "bookings": Booking.objects.all()}
-    '''for booking in Booking.objects.all():
-        booking.is_active()'''
-    return render(
-        request,
-        template_name="booking/rooms.html",
-        context=context
-    )
-
-def get_room(request, room_id):
-    context = {"room": Room.objects.get(id=room_id)}
-    return render(
-        request,
-        "booking/room_details.html",
-        context=context
-    )
-
 def search_rooms(request):
     if request.method == "POST":
-        hotel = request.POST.get("city")
-        guests = request.POST.get("human_amount")
+        hotel = request.POST.get("hotel")
+        capacity = request.POST.get("capacity")
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
-        try:
-            rooms = Room.objects.filter(capacity=guests, hotel=hotel)
-            context = {"rooms":rooms, "start": start_date, "end": end_date}
+        return redirect(f'show-results//{hotel}/{capacity}/{start_date}/{end_date}', hotel=hotel, capacity=capacity, start_date=start_date, end_date=end_date)
 
-            '''for booking in Booking.objects.all():
-                booking.is_active()'''
-        except ValueError:
-            messages.success(request, ("Invalid value for room-capacity!"))
-            context = {}
-        return render(
-            request,
-            "booking/rooms.html",
-            context=context
-            )       
-    else:
-        return render(request, "booking/rooms.html")
-    
+def show_results(request, hotel, capacity, start_date, end_date):
+    rooms = Room.objects.filter(capacity=capacity, hotel=hotel)
+    hotel = Hotel.objects.get(id=hotel)
+    context = {"hotel": hotel, "rooms": rooms, "capacity": capacity, "start_date": start_date, "end_date": end_date}
+    return render(request, "booking/rooms.html", context)
 
-def book_room(request, room_id):
+def book_room(request, hotel, capacity, start_date, end_date):
     if request.user.is_authenticated:
         if request.method == "POST":
-            start_date = request.POST.get('start_date')
-            end_date = request.POST.get('end_date')
-            room = Room.objects.get(id=room_id)
+            category = request.POST.get('category')
+            rooms = Room.objects.filter(category=category, hotel=hotel, capacity=capacity)
+            room = rooms[randint(0, len(rooms))]
+            room = Room.objects.get(id=room.id)
             room.available = False
             room.save()
             user = request.user
             booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
             return redirect("booking-info", pk = booking.id)
         else:
-            context = {"room": Room.objects.get(id=room_id)}
-            return render(request, template_name="booking/book_room.html", context=context)
+            return redirect("index")
     else:
         return redirect("login")
 
 def show_booking_details(request, pk):
     try:
         booking = Booking.objects.get(id=pk)
-        context = {'booking': booking}
-        return render(request, 'booking/booking_info.html', context=context)
     except Booking.DoesNotExist:
         return HttpResponse (
             "Booking doesn't exist!",
             status=404
         )
+    if request.user.id == booking.user.id:
+        context = {'booking': booking}
+        return render(request, 'booking/booking_info.html', context=context)
