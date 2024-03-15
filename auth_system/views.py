@@ -5,18 +5,19 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 from booking.models import *
-
+from .forms import *
 
 def register_user(request):
     if request.user.is_authenticated:
         return redirect("index")
     else:
+        
         if request.method == 'POST':
             username = request.POST.get("username")
             name = request.POST.get('first_name')
             surname = request.POST.get('last_name')
             email = request.POST.get('email')
-            phone_number = request.POST.get('tel')
+            phone_number = request.POST.get('phone_number')
             password = request.POST.get('password')
             
             new_user = CustomUser.objects.create_user(username=username, first_name=name, last_name=surname, email=email, phone_number=phone_number,password=password)
@@ -26,7 +27,10 @@ def register_user(request):
 
             return redirect("index")
         else:
-            return render(request, "auth_system/register.html")
+            context = {
+            "form": UserCreationForm
+            }
+            return render(request, "auth_system/register.html", context=context)
 
 def login_user(request):
     if request.user.is_authenticated:
