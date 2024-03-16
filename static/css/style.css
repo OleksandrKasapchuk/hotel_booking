@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    color : #A4A4A4;
 }
 nav a {
     text-decoration: none;
@@ -27,16 +28,16 @@ ul {
     font-weight: 600;
 }
 .hotel-info-text {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 400;
+    padding: 3px;
 }
 body {
-    /* background-image: url("/static/images/hotel_back.jpg");
     background-size: cover;
-    background-repeat: no-repeat; */
-    background-color:bisque;
+    background-repeat: no-repeat;
+    background-image: url("/static/images/e5ce50f326895b9962862d91a81795fa.jpg");
     width: 100%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
 }
@@ -47,7 +48,7 @@ nav {
     height: 10vh;
 }
 nav ul {
-    background-color: rgb(98, 94, 94);
+    background-color: #050505;
     display: flex;
     height: 100%;
     justify-content: flex-end;
@@ -59,23 +60,25 @@ nav li:first-child {
 }
 nav li {
     height: 50px;
+    
 }
 nav a {
     height: 100%;
     padding: 0 30px;
     display: flex;
     align-items: center;
-    color: black;
+    color: #9FA0A1;
     transition: 0.3s;
 }
 nav a:hover {
     background-color: gray;
 }
 .header-index {
-    background-image: url("/static/images/hotel_image2.jpg");
+    background: #434343;
     background-size: 100% 100%;
     width: 100%;
     height: 30vh;
+    text-align: center
 }
 .review-container {
     margin-top: 10vh;
@@ -112,8 +115,11 @@ main form {
     height: 100%;
 }
 footer {
+    padding: 30px;
     height: 30vh;
-    background-color: rgb(98, 94, 94);
+    background-color: #050505;
+    color: #9FA0A1;
+    text-align: center
 }
 input {
     font-size: 14px;
@@ -202,12 +208,17 @@ input {
 
 .formality {
     flex-direction: row;
-    background-color: rgba(116, 126, 159, 0.52);
+    background-color: #767676;
     border: 3px dashed rgba(15, 18, 26, 0.927);
 }
 .formality * {
     font-size: 17px;
     margin: 10px;
+}
+
+mark {
+    background-color: rgba(164, 164, 164, 0.5);
+    color: black;
 }
 
 @media(max-width: 900px){
