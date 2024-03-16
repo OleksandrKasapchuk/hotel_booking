@@ -20,15 +20,13 @@
 			<input type="text" name="review-text">
 			<button type="submit" class="btn btn-secondary">Send</button>
 		</form>
-		<article class="row row-cols-4">
-			{% for review in reviews %}
-				<section class="col">
-					<h2> {{review.user}} </h2>
-					<h3> {{review.mark}} </h3>
-					<p> {{review.text}} </p>
-				</section>
-			{% endfor %}
-		</article>
+		{% for review in reviews %}
+			<section class="review">
+				<h2> {{review.user}} </h2>
+				<h3> {{review.mark}} </h3>
+				<p> {{review.text}} </p>
+			</section>
+		{% endfor %}
 	</section>
 </main>
 {% endblock %}

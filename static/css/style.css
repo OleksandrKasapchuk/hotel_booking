@@ -152,6 +152,13 @@ input {
     flex-direction: row;
     gap: 10px;
 }
+.review {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 80%;
+    min-height: 20vh;
+    margin: 10px;
+    border-radius: 10px;
+}
 .btn-secondary {
     background-color: gray;
     border-radius: 10px;
