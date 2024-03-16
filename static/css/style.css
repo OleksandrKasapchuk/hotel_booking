@@ -31,9 +31,6 @@ ul {
     font-weight: 400;
 }
 body {
-    /* background-image: url("/static/images/hotel_back.jpg");
-    background-size: cover;
-    background-repeat: no-repeat; */
     background-color:bisque;
     width: 100%;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -79,6 +76,13 @@ nav a:hover {
 }
 .review-container {
     margin-top: 10vh;
+}
+.review {
+    width: 80%;
+    min-height: 20vh;
+    border-radius: 10px;
+    background-color:rgba(0, 0, 0, 0.6);
+    margin: 10px;
 }
 main {
     font-size: 1.5rem;
@@ -143,7 +147,7 @@ input {
     outline: none;
 }
 .review-form {
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
 }
 .btn-secondary {
