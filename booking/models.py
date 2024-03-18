@@ -22,7 +22,6 @@ class Category(models.Model):
 class Room(models.Model):
     number = models.IntegerField()
     capacity = models.IntegerField()
-    location = models.TextField(blank=True)
     available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
