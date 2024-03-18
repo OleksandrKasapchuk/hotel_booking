@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import *
 from random import randint
-
+from datetime import *
 def index(request):
     if request.method == 'POST':
         user = request.user
@@ -25,7 +25,19 @@ def search_rooms(request):
         capacity = request.POST.get("capacity")
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
-        return redirect(f'show-results//{hotel}/{capacity}/{start_date}/{end_date}', hotel=hotel, capacity=capacity, start_date=start_date, end_date=end_date)
+        if hotel is None:
+            messages.error(request, "city must be chosen")
+        elif capacity is None:
+            messages.error(request, "number of guests must be chosen")
+        elif start_date == '' or end_date == '':
+            messages.error(request, "dates must be chosen")
+        elif datetime.strptime(start_date, "%Y-%m-%d") < datetime.today():
+            messages.error(request, "start date must be today or later")
+        elif datetime.strptime(end_date, "%Y-%m-%d") < datetime.strptime(start_date, "%Y-%m-%d"): 
+            messages.error(request, "end date must be later than start date")
+        else:
+            return redirect(f'show-results//{hotel}/{capacity}/{start_date}/{end_date}', hotel=hotel, capacity=capacity, start_date=start_date, end_date=end_date)
+        return redirect("index")
 
 def show_results(request, hotel, capacity, start_date, end_date):
     rooms = Room.objects.filter(capacity=capacity, hotel=hotel)
