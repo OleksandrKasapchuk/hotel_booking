@@ -85,7 +85,7 @@ nav a:hover {
 }
 main {
     font-size: 1.5rem;
-    width: 60vw;
+    width: 1000px;
     height: 80vh;
     color:white;
     align-self: center;
@@ -218,6 +218,7 @@ input {
     flex-direction: row;
     background-color: #767676;
     border: 3px dashed rgba(15, 18, 26, 0.927);
+    height: auto;
 }
 .formality * {
     font-size: 17px;
@@ -229,7 +230,7 @@ mark {
     color: black;
 }
 
-@media(max-width: 900px){
+@media(max-width: 1000px){
     .hideOnMobile{
         display: none;
     }
@@ -238,5 +239,25 @@ mark {
     }
     main {
         margin: 0;
+    }
+
+    .header-index {
+        height: auto;
+    }
+
+    .main-index {
+        width: 100%;
+    }
+
+    .formality {
+        flex-direction: column;
+    }
+
+    .review-container {
+        margin: 200px 0 200px 0;
+    }
+
+    .review-form {
+        flex-direction: column;
     }
 }
