@@ -10,7 +10,10 @@ def index(request):
         user = request.user
         mark = request.POST.get("review-mark")
         text = request.POST.get("review-text")
-        Review.objects.create(user=user, mark=mark, text=text)
+        try:
+            Review.objects.create(user=user, mark=mark, text=text)
+        except:
+            messages.error(request, "Mark is required")
         return redirect('index')
     else:
         context = {"reviews": Review.objects.all()[:8]}
