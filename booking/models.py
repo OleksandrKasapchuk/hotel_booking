@@ -61,7 +61,7 @@ class Booking(models.Model):
 
 
 class Review(models.Model):
-    text = models.CharField(max_length=150)
+    text = models.CharField(max_length=150, blank=True, null=True)
     mark = models.IntegerField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
