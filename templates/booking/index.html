@@ -14,7 +14,7 @@
 		<h2>Reviews</h2>
 		<form method="POST" action="{% url 'index' %}" class="review-form">
 			{% csrf_token %}
-			<label for="review-mark">Your mark</label>
+			<label for="review-mark">Your mark:</label>
 			<input type="number" name="review-mark" min=1 max=5>
 			<label for="review-text">Your text:</label>
 			<input type="text" name="review-text">
