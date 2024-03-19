@@ -1,13 +1,13 @@
 <form method="POST" action="{% url 'search-rooms' %}" class="formality">
     {% csrf_token %}
-    <!-- <label for="hotel">City:</label> -->
+    <label for="hotel">City:</label>
     <select name="hotel">
         <option disabled="disabled" selected="selected"></option>
         <option value=1>Kyiv</option>
         <option value=2>Ternopil</option>
         <option value=3>Ivano-Frankivsk</option>
     </select>
-    <!-- <label for="capacity">Number of guests:</label> -->
+    <label for="capacity">Number of guests:</label>
     <select name="capacity">
         <option disabled="disabled" selected="selected"></option>
         <option value=1>1</option>
@@ -15,9 +15,9 @@
         <option value=3>3</option>
         <option value=4>4</option>
     </select>
-    <!-- <label for="start_date">From:</label> -->
+    <label for="start_date">From:</label>
     <input type="date" name="start_date">
-    <!-- <label for="end_date">To:</label> -->
+    <label for="end_date">To:</label>
     <input type="date" name="end_date">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
