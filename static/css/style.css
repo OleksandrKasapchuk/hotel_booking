@@ -4,7 +4,7 @@
     color : #A4A4A4;
 }
 nav a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 h1 {
     text-align: center;
@@ -60,7 +60,6 @@ nav li:first-child {
 }
 nav li {
     height: 50px;
-    
 }
 nav a {
     height: 100%;
@@ -71,8 +70,9 @@ nav a {
     transition: 0.3s;
 }
 nav a:hover {
-    background-color: gray;
+    background-color: gray !important;
 }
+
 .header-index {
     background: #434343;
     background-size: 100% 100%;
@@ -170,8 +170,11 @@ input {
     margin: 10px;
 }
 .choose-type-container {
-    flex-direction: row;
+    flex-direction: column;
     gap: 30px;
+    background-color: rgba(0, 0, 0, 0.2);
+    align-items: start;
+    text-align: start;
     width: 30vw;
     height: 30vh;
     background-color: pink;
@@ -224,6 +227,75 @@ input {
     font-size: 17px;
     margin: 10px;
 }
+
+mark {
+    background-color: rgba(164, 164, 164, 0.5);
+    color: black;
+}
+
+a:link {
+    color: gray;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(211, 211, 211, 0.5);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+main a:visited {
+    color: gray;
+}
+
+.category_box {
+    border: #050505 solid;
+    border-radius: 10px;
+    flex-direction: column;
+    height: 140px;
+    width: 400px;
+    justify-content: center;
+}
+
+.btn-room {
+    background-color: #393939;
+    border: #050505 solid;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+}
+
+.btn-ch {
+    background-color: #393939;
+    border: #050505 solid;
+    border-radius: 10px;
+    width: 120px;
+    height: 50px;
+    margin: 5px;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, rgba(77,77,77,1) 0%, rgba(0,0,0,1) 100%);
+}
+
+.eco_box {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../images/eco.jpg");
+}
+
+.std_box {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../images/stand.jpg");
+}
+
+.vip_box {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../images/vip.jpg");
+}
+
 @media(max-width: 1000px){
     .hideOnMobile{
         display: none;

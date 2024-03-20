@@ -5,13 +5,19 @@
     <h1> {{hotel}} </h1>
     <form method="POST" action="{% url 'book-room' hotel.id capacity start_date end_date %}" class="choose-type-container">
         {% csrf_token %}
-        <label for="eco">eco</label>
-        <input type="radio" name="category" id="eco"value=1>
-        <label for="standard">standard</label>
-        <input type="radio" name="category" id="standard"value=2>
-        <label for="vip">vip</label>
-        <input type="radio" name="category" id="vip"value=3>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="category_box eco_box">
+            <input type="radio" class="btn-check" name="category" id="eco" autocomplete="off" value=1> 
+            <label class="btn btn-secondary btn-ch" for="eco">Eco</label>
+        </div>
+        <div class="category_box std_box">
+            <input type="radio" class="btn-check" name="category" id="standart" autocomplete="off" value=2> 
+            <label class="btn btn-secondary btn-ch" for="standart">Standart</label>
+        </div>
+        <div class="category_box vip_box">
+            <input type="radio" class="btn-check" name="category" id="vip" autocomplete="off" value=3> 
+            <label class="btn btn-secondary btn-ch" for="vip">Vip</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-room">Submit</button>
     </form>
 </main>
 {% endblock %}
