@@ -11,7 +11,8 @@ def index(request):
         mark = request.POST.get("review-mark")
         text = request.POST.get("review-text")
         try:
-            Review.objects.create(user=user, mark=mark, text=text)
+            if int(mark) > 0 and int(mark) < 6:
+                Review.objects.create(user=user, mark=mark, text=text)
         except:
             messages.error(request, "Mark is required")
         return redirect('index')

@@ -80,9 +80,6 @@ nav a:hover {
     height: 30vh;
     text-align: center
 }
-.review-container {
-    margin-top: 10vh;
-}
 main {
     font-size: 1.5rem;
     width: 1000px;
@@ -100,7 +97,6 @@ main {
     justify-content: center;
     height: 100%;
 }
-
 main > ul > li {
     display: inline-block;
     font-size: 24px;
@@ -148,6 +144,12 @@ input {
 .login-form-item, .register-form-item, .change-password-form, .book-room-form:focus {
     outline: none;
 }
+.review-container {
+    margin-top: 10vh;
+}
+.review-container * {
+    margin: 10px;
+}
 .review-form {
     flex-direction: row;
     gap: 10px;
@@ -158,8 +160,8 @@ input {
     min-height: 20vh;
     margin: 10px;
     border-radius: 10px;
+    border: 1px white solid;
 }
-
 .btn-secondary {
     background-color: gray;
     border-radius: 10px;
@@ -170,11 +172,12 @@ input {
 .choose-type-container {
     flex-direction: column;
     gap: 30px;
-    /* width: 30vw;
-    height: 30vh; */
     background-color: rgba(0, 0, 0, 0.2);
     align-items: start;
     text-align: start;
+    width: 30vw;
+    height: 30vh;
+    background-color: pink;
 }
 .sidebar {
     position: fixed;
@@ -214,7 +217,6 @@ input {
 .user_bookings{
     padding-left: 2rem;
 }
-
 .formality {
     flex-direction: row;
     background-color: #767676;
@@ -294,7 +296,6 @@ main a:visited {
     background-image: url("../images/vip.jpg");
 }
 
-
 @media(max-width: 1000px){
     .hideOnMobile{
         display: none;
@@ -310,19 +311,31 @@ main a:visited {
         height: auto;
     }
 
-    .main-index {
+    main {
         width: 100%;
     }
 
     .formality {
         flex-direction: column;
+        justify-content: center;
+        margin: 0 10px 0 10px;
     }
-
+    .formality * {
+        width:50%;
+        margin: 5px;
+    }
     .review-container {
-        margin: 200px 0 200px 0;
+        margin: 300px 0 0 0;
     }
-
     .review-form {
         flex-direction: column;
+        align-items: start;
     }
+    .review-form input[type="number"] {
+        width: 20%;
+    }
+    .review-form input[type="text"] {
+        width: 90%;
+    }
+
 }
