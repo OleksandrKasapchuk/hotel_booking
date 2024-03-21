@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block main %}
-<main>
-    <h1> {{hotel}} </h1>
+<h1> {{hotel}} </h1>
+<main class="container_room">
     <form method="POST" action="{% url 'book-room' hotel.id capacity start_date end_date %}" class="choose-type-container">
         {% csrf_token %}
         <div class="category_box eco_box">
@@ -19,5 +19,16 @@
         </div>
         <button type="submit" class="btn btn-primary btn-room">Submit</button>
     </form>
+    <fieldset class="favors">
+        <legend class="legend">Choose your additional servises:</legend>
+            <input type="checkbox" name="horns" value=1>
+            <label for="horns">Delivery of breakfast to the room</label> <br>
+            <input type="checkbox"name="scales" value=2>
+            <label for="scales">Mini-fridge with cooling drink</label> <br>
+            <input type="checkbox" name="horns" value=3>
+            <label for="scales">Carry suitcases to the room</label> <br>
+            <input type="checkbox" name="horns" value=4>
+            <label for="horns">Buffet pass</label>
+    </fieldset>      
 </main>
 {% endblock %}

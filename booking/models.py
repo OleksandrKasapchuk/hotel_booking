@@ -34,6 +34,9 @@ class Room(models.Model):
     def __str__(self):
         return f"{self.hotel} room #{self.number} for {self.capacity}"
 
+class AdditionalFavor(models.Model):
+    name = models.CharField(max_length=50)
+    price=models.DecimalField(max_digits=10, decimal_places=2)
 
 class AdditionalFavor(models.Model):
     name = models.CharField(max_length=50)
@@ -47,6 +50,7 @@ class Booking(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     creation_date = models.DateField(auto_now_add=True)
+    favors = models.ManyToManyField(AdditionalFavor)
 
     def is_active(self):
         # ending = self.end_date.date()
@@ -73,3 +77,4 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.mark}"
+    
