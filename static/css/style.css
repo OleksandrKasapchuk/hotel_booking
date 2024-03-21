@@ -252,8 +252,9 @@ main a:visited {
 .category_box {
     border: #050505 solid;
     border-radius: 10px;
+    display: flex;
     flex-direction: column;
-    height: 140px;
+    height: 300px;
     width: 400px;
     justify-content: center;
 }
