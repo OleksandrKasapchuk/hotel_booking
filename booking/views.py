@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import *
 from random import randint
 from datetime import *
+
 def index(request):
     if request.method == 'POST':
         user = request.user
@@ -35,9 +36,10 @@ def search_rooms(request):
             messages.error(request, "number of guests must be chosen")
         elif start_date == '' or end_date == '':
             messages.error(request, "dates must be chosen")
-        elif datetime.strptime(start_date, "%Y-%m-%d") < datetime.today():
+        elif datetime.strptime(start_date, "%Y-%m-%d").date() < date.today():
+            print(datetime.today())
             messages.error(request, "start date must be today or later")
-        elif datetime.strptime(end_date, "%Y-%m-%d") < datetime.strptime(start_date, "%Y-%m-%d"): 
+        elif datetime.strptime(end_date, "%Y-%m-%d") <= datetime.strptime(start_date, "%Y-%m-%d"): 
             messages.error(request, "end date must be later than start date")
         else:
             return redirect(f'show-results//{hotel}/{capacity}/{start_date}/{end_date}', hotel=hotel, capacity=capacity, start_date=start_date, end_date=end_date)
@@ -47,19 +49,24 @@ def show_results(request, hotel, capacity, start_date, end_date):
     rooms = Room.objects.filter(capacity=capacity, hotel=hotel)
     hotel = Hotel.objects.get(id=hotel)
     context = {"hotel": hotel, "rooms": rooms, "capacity": capacity, "start_date": start_date, "end_date": end_date}
-    return render(request, "booking/rooms.html", context)
+    return render(request, "booking/rooms.html", context=context)
 
 def book_room(request, hotel, capacity, start_date, end_date):
     if request.user.is_authenticated:
         if request.method == "POST":
             category = request.POST.get('category')
+            favors = request.POST.getlist('favor')
+            print("Favors=",favors)
             rooms = Room.objects.filter(category=category, hotel=hotel, capacity=capacity)
-            room = rooms[randint(0, len(rooms))]
+            room = rooms[randint(0, len(rooms)-1)]
             room = Room.objects.get(id=room.id)
             room.available = False
             room.save()
             user = request.user
             booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
+            for favor in favors:
+                booking.favors.add(AdditionalFavor.objects.get(id=int(favor)))
+                booking.save()
             return redirect("booking-info", pk = booking.id)
         else:
             return redirect("index")

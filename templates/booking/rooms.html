@@ -3,32 +3,41 @@
 {% block main %}
 <h1> {{hotel}} </h1>
 <main class="container_room">
-    <form method="POST" action="{% url 'book-room' hotel.id capacity start_date end_date %}" class="choose-type-container">
+    <form method="POST" action="{% url 'book-room' hotel.id capacity start_date end_date %}" class="category-form">
         {% csrf_token %}
-        <div class="category_box eco_box">
-            <input type="radio" class="btn-check" name="category" id="eco" autocomplete="off" value=1> 
-            <label class="btn btn-secondary btn-ch" for="eco">Eco</label>
-        </div>
-        <div class="category_box std_box">
-            <input type="radio" class="btn-check" name="category" id="standart" autocomplete="off" value=2> 
-            <label class="btn btn-secondary btn-ch" for="standart">Standart</label>
-        </div>
-        <div class="category_box vip_box">
-            <input type="radio" class="btn-check" name="category" id="vip" autocomplete="off" value=3> 
-            <label class="btn btn-secondary btn-ch" for="vip">Vip</label>
-        </div>
+        <fieldset class="choose-type-container">
+            <div class="category_box eco_box">
+                <input type="radio" class="btn-check" name="category" id="eco" autocomplete="off" value=1> 
+                <label class="btn btn-secondary btn-ch" for="eco">Eco</label>
+            </div>
+            <div class="category_box std_box">
+                <input type="radio" class="btn-check" name="category" id="standart" autocomplete="off" value=2 checked> 
+                <label class="btn btn-secondary btn-ch" for="standart">Standart</label>
+            </div>
+            <div class="category_box vip_box">
+                <input type="radio" class="btn-check" name="category" id="vip" autocomplete="off" value=3> 
+                <label class="btn btn-secondary btn-ch" for="vip">Vip</label>
+            </div>
+        </fieldset>
+        <fieldset class="favors">
+            <legend class="legend">Choose your additional servises:</legend>
+            <input type="checkbox" id="favor1" name="favor" value=1>
+            <label for="favor1">Delivery of breakfast to the room</label> <br> <hr>
+            <input type="checkbox" id="favor2" name="favor" value=2>
+            <label for="favor2">Mini-fridge with cooling drink</label> <br> <hr>
+            <input type="checkbox" id="favor3" name="favor" value=3>
+            <label for="favor3">A ticket to the evening show</label>  <br> <hr>
+            <input type="checkbox" id="favor4" name="favor" value=4>
+            <label for="favor4">Carry suitcases to the room</label> <br> <hr>
+            <input type="checkbox" id="favor5" name="favor" value=5>
+            <label for="favor5">Babysitting services</label> <br> <hr>
+            <input type="checkbox" id="favor6" name="favor" value=6>
+            <label for="favor6">Laundry services</label> <br> <hr> 
+            <input type="checkbox" id="favor7" name="favor" value=7>
+            <label for="favor7">Buffet pass</label> <br>
+        </fieldset>
+
         <button type="submit" class="btn btn-primary btn-room">Submit</button>
     </form>
-    <fieldset class="favors">
-        <legend class="legend">Choose your additional servises:</legend>
-            <input type="checkbox" name="horns" value=1>
-            <label for="horns">Delivery of breakfast to the room</label> <br>
-            <input type="checkbox"name="scales" value=2>
-            <label for="scales">Mini-fridge with cooling drink</label> <br>
-            <input type="checkbox" name="horns" value=3>
-            <label for="scales">Carry suitcases to the room</label> <br>
-            <input type="checkbox" name="horns" value=4>
-            <label for="horns">Buffet pass</label>
-    </fieldset>      
 </main>
 {% endblock %}

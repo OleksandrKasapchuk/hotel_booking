@@ -169,16 +169,18 @@ input {
     height: 50px;
     margin: 10px;
 }
-.choose-type-container {
-    flex-direction: column;
-    gap: 30px;
+.category-form {
+    flex-direction: row;
+    gap: 10px;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 22px;
     align-items: start;
     text-align: start;
-    width: 30vw;
-    height: 100vh;
+    width: 100%;
+    height: 80vh;
+    flex-wrap: wrap;
 }
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -320,7 +322,7 @@ main a:visited {
 
 .favors {
     border: 1px solid #050505;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     border-radius: 17px;
     padding: 10px;
     margin-left: 15px;
@@ -328,12 +330,20 @@ main a:visited {
 
 .legend {
     color: rgb(195, 195, 195);
+    font-size: 1.35rem;
+    text-align: center;
+    float: none;
 }
 
 .favors label {
     color: rgb(193, 193, 193);
 }
-
+.choose-type-container {
+    height: 80%;
+    display:flex;
+    gap: 30px;
+    flex-direction: column;
+}
 @media(max-width: 1000px){
     .hideOnMobile{
         display: none;

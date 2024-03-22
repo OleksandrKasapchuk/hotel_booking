@@ -36,15 +36,15 @@ class Room(models.Model):
 
 class AdditionalFavor(models.Model):
     name = models.CharField(max_length=50)
-    price=models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
 class Booking(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="bookings")
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
+    favors = models.ManyToManyField(AdditionalFavor)
     start_date = models.DateField()
     end_date = models.DateField()
     creation_date = models.DateField(auto_now_add=True)
-    favors = models.ManyToManyField(AdditionalFavor)
 
     def is_active(self):
         # ending = self.end_date.date()

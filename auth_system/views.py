@@ -5,7 +5,6 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 from booking.models import *
-from .forms import *
 
 def register_user(request):
     if request.user.is_authenticated:
@@ -26,10 +25,7 @@ def register_user(request):
 
             return redirect("index")
         else:
-            context = {
-            "form": UserCreationForm
-            }
-            return render(request, "auth_system/register.html", context=context)
+            return render(request, "auth_system/register.html")
 
 def login_user(request):
     if request.user.is_authenticated:
