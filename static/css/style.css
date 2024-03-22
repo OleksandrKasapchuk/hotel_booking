@@ -117,7 +117,10 @@ footer {
     height: auto;
     background-color: #050505;
     color: #9FA0A1;
-    text-align: center
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 input {
     font-size: 14px;
@@ -151,6 +154,10 @@ input {
 }
 .review-container * {
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .review-form {
     flex-direction: row;
@@ -158,11 +165,11 @@ input {
 }
 .review {
     background-color: rgba(0, 0, 0, 0.6);
-    width: 80%;
     min-height: 20vh;
     margin: 10px;
     border-radius: 10px;
     border: 1px white solid;
+    align-self: center;
 }
 .btn-secondary {
     background-color: gray;
@@ -346,6 +353,7 @@ main a:visited {
     gap: 30px;
     flex-direction: column;
 }
+
 @media(max-width: 1000px){
     .hideOnMobile{
         display: none;
