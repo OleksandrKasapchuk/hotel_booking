@@ -6,6 +6,16 @@ from .forms import *
 from random import randint
 from datetime import *
 
+
+def is_room_available(room, start_date, end_date):
+    bookings = Booking.objects.filter(room=room)
+    for booking in bookings:
+        if (datetime.strptime(start_date, "%Y-%m-%d").date() >= booking.start_date 
+            and datetime.strptime(start_date, "%Y-%m-%d").date() <= booking.end_date) or (datetime.strptime(end_date, "%Y-%m-%d").date() >= booking.start_date 
+            and datetime.strptime(end_date, "%Y-%m-%d").date() <= booking.end_date):
+            return False
+    return True
+
 def index(request):
     if request.method == 'POST':
         user = request.user
@@ -24,6 +34,7 @@ def index(request):
             "booking/index.html",
             context=context
         )
+
 def search_rooms(request):
     if request.method == "POST":
         hotel = request.POST.get("hotel")
@@ -56,18 +67,23 @@ def book_room(request, hotel, capacity, start_date, end_date):
         if request.method == "POST":
             category = request.POST.get('category')
             favors = request.POST.getlist('favor')
-            print("Favors=",favors)
             rooms = Room.objects.filter(category=category, hotel=hotel, capacity=capacity)
-            room = rooms[randint(0, len(rooms)-1)]
-            room = Room.objects.get(id=room.id)
-            room.available = False
-            room.save()
-            user = request.user
-            booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
-            for favor in favors:
-                booking.favors.add(AdditionalFavor.objects.get(id=int(favor)))
-                booking.save()
-            return redirect("booking-info", pk = booking.id)
+            available_rooms = []
+            for room in rooms:
+                if is_room_available(room, start_date, end_date):
+                    available_rooms.append(room)
+            if len(available_rooms) == 0:
+                messages.error(request, 'No room with this type is available')
+                return redirect("show-results", hotel, capacity, start_date, end_date)
+            else:
+                room = rooms[randint(0, len(available_rooms)-1)]
+                room = Room.objects.get(id=room.id)
+                user = request.user
+                booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
+                for favor in favors:
+                    booking.favors.add(AdditionalFavor.objects.get(id=int(favor)))
+                    booking.save()
+                return redirect("booking-info", pk = booking.id)
         else:
             return redirect("index")
     else:
