@@ -55,13 +55,18 @@ def book_room(request, hotel, capacity, start_date, end_date):
     if request.user.is_authenticated:
         if request.method == "POST":
             category = request.POST.get('category')
+            favors = request.POST.getlist('favor')
+            print("Favors=",favors)
             rooms = Room.objects.filter(category=category, hotel=hotel, capacity=capacity)
-            room = rooms[randint(0, len(rooms))]
+            room = rooms[randint(0, len(rooms)-1)]
             room = Room.objects.get(id=room.id)
             room.available = False
             room.save()
             user = request.user
             booking = Booking.objects.create(user=user, room=room, start_date=start_date,end_date=end_date)
+            for favor in favors:
+                booking.favors.add(AdditionalFavor.objects.get(id=int(favor)))
+                booking.save()
             return redirect("booking-info", pk = booking.id)
         else:
             return redirect("index")
