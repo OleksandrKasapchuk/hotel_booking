@@ -33,8 +33,7 @@ ul {
     padding: 3px;
 }
 body {
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
     background-image: url("/static/images/e5ce50f326895b9962862d91a81795fa.jpg");
     width: 100%;
     font-family: 'Courier New', Courier, monospace;
@@ -80,6 +79,7 @@ nav a:hover {
     height: 30vh;
     text-align: center
 }
+
 main {
     font-size: 1.5rem;
     width: 1000px;
@@ -90,7 +90,9 @@ main {
     background-color: rgba(0, 0, 0, 0.4);
 }
 .main-index {
-    height:auto;
+    height: auto;
+    min-height: 60vh;
+    margin-bottom: 5px;
 }
 .form-container {
     display: flex;
@@ -112,7 +114,7 @@ main form {
 }
 footer {
     padding: 30px;
-    height: 30vh;
+    height: auto;
     background-color: #050505;
     color: #9FA0A1;
     text-align: center
@@ -358,7 +360,9 @@ main a:visited {
     .header-index {
         height: auto;
     }
-
+    .nav-index {
+        height: auto;
+    }
     main {
         width: 100%;
     }
