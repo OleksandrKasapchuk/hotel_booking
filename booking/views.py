@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from booking.models import *
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import *
 from random import randint
 from datetime import *
 
@@ -99,4 +98,16 @@ def show_booking_details(request, pk):
         )
     if request.user.id == booking.user.id:
         context = {'booking': booking}
-        return render(request, 'booking/booking_info.html', context=context)
+        return render(request, 'booking/booking_info.html', context=context)    
+
+def delete_booking(request, pk):
+    try:
+        booking = Booking.objects.get(id=pk)
+    except Booking.DoesNotExist:
+        return HttpResponse (
+            "Booking doesn't exist!",
+            status=404
+        )
+    user = booking.user
+    booking.delete()
+    return redirect(f"/user-info/{user.id}")
