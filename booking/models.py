@@ -68,7 +68,5 @@ class Review(models.Model):
     text = models.CharField(max_length=150, blank=True, null=True)
     mark = models.IntegerField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"{self.user} - {self.mark}"
-    

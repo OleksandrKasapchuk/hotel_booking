@@ -4,11 +4,15 @@
 <main>
 	<h1>Booking informations</h1>
 	<h2>Room: {{ booking.room.number }}</h2>
+	<h2>{{ booking.room.hotel }} </h2>
 	<h2>Capacity: {{ booking.room.capacity }} </h2>
+	<hr>
 	<h2>Name: {{booking.user.first_name}} </h2>
 	<h2>Surname: {{booking.user.last_name}} </h2>
 	<h3>Email: {{booking.user.email}} </h3>
+	<hr>
 	<h4>Start time: {{booking.start_date}} </h4>
 	<h4>End time: {{booking.end_date}} </h4>
+	<h3><a href="{% url 'delete-booking' booking.id %}">Delete booking</a></h3>
 </main>
 {% endblock %}
