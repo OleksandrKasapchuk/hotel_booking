@@ -354,6 +354,26 @@ main a:visited {
     flex-direction: column;
 }
 
+.category_box h2 {
+    color: rgb(201, 201, 201);
+    font-size: 2rem;
+}
+
+.category_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ad2{
+    display: none;
+}
+
+.ad_container {
+    display: flex;
+    justify-content: center;
+}
+
 @media(max-width: 1000px){
     .hideOnMobile{
         display: none;
@@ -395,6 +415,14 @@ main a:visited {
         width: 20%;
     }
     .review-form input[type="text"] {
+        width: 90%;
+    }
+
+    .ad1{
+        display: none;
+    }
+    .ad2{
+        display: block;
         width: 90%;
     }
 }
