@@ -34,6 +34,7 @@ ul {
 }
 body {
     background-size: 100vw 100vh;
+    background-repeat: no-repeat;
     background-image: url("/static/images/e5ce50f326895b9962862d91a81795fa.jpg");
     width: 100%;
     font-family: 'Courier New', Courier, monospace;
@@ -83,11 +84,11 @@ nav a:hover {
 main {
     font-size: 1.5rem;
     width: 1000px;
-    height: 80vh;
     color:white;
     align-self: center;
     box-shadow: 0px 0px 10px black;
     background-color: rgba(0, 0, 0, 0.4);
+    min-height: 80vh;
 }
 .main-index {
     height: auto;
@@ -132,6 +133,9 @@ input {
 .input-wrapper label {
     align-self: start;
     font-weight: 700;
+}
+.login-form {
+    height: 80vh;
 }
 .login-form, .register-form, .edit-user-form, .change-password-form, .book-room-form {
     width: 500px;
@@ -178,17 +182,6 @@ input {
     height: 50px;
     margin: 10px;
 }
-.category-form {
-    flex-direction: row;
-    gap: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 22px;
-    align-items: start;
-    text-align: start;
-    width: 100%;
-    height: 80vh;
-    flex-wrap: wrap;
-}
 
 .sidebar {
     position: fixed;
@@ -210,6 +203,7 @@ input {
 }
 .sidebar li a {
     padding: 0 20px;
+    color: black;
 }
 .sidebar li .capacity-form {
     margin: 0 20px 0 20px;
@@ -329,6 +323,18 @@ main a:visited {
     padding: 10px;
 }
 
+.category-form {
+    flex-direction: row;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 22px;
+    align-items: start;
+    text-align: start;
+    width: 100%;
+    height: 80%;
+    flex-wrap: wrap;
+}
+
 .favors {
     border: 1px solid #050505;
     font-size: 1.25rem;
@@ -348,7 +354,6 @@ main a:visited {
     color: rgb(193, 193, 193);
 }
 .choose-type-container {
-    height: 80%;
     display:flex;
     gap: 30px;
     flex-direction: column;
@@ -375,16 +380,15 @@ main a:visited {
 }
 
 @media(max-width: 1000px){
+    body {
+        background-size: 100vw 100%;
+    }
     .hideOnMobile{
         display: none;
     }
     .menu {
         display: block;
     }
-    main {
-        margin: 0;
-    }
-
     .header-index {
         height: auto;
     }
@@ -392,9 +396,9 @@ main a:visited {
         height: auto;
     }
     main {
+        margin: 0;
         width: 100%;
     }
-
     .formality {
         flex-direction: column;
         justify-content: center;
@@ -405,7 +409,7 @@ main a:visited {
         margin: 5px;
     }
     .review-container {
-        margin: 300px 0 0 0;
+        width: 90%;
     }
     .review-form {
         flex-direction: column;
@@ -424,5 +428,19 @@ main a:visited {
     .ad2{
         display: block;
         width: 90%;
+    }
+    .container_room {
+        height: auto;
+    }
+    .category-form {
+        flex-direction: column;
+        height: 100%;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+}
+@media (max-width: 500px) {
+    .category_box {
+        width: 90vw;
     }
 }
