@@ -17,15 +17,18 @@ def is_room_available(room, start_date, end_date):
 
 def index(request):
     if request.method == 'POST':
-        user = request.user
-        mark = request.POST.get("review-mark")
-        text = request.POST.get("review-text")
-        try:
-            if int(mark) > 0 and int(mark) < 6:
-                Review.objects.create(user=user, mark=mark, text=text)
-        except:
-            messages.error(request, "Mark is required")
-        return redirect('index')
+        if not request.user.is_authenticated:
+            return redirect('login')
+        else:
+            user = request.user
+            mark = request.POST.get("review-mark")
+            text = request.POST.get("review-text")
+            try:
+                if int(mark) > 0 and int(mark) < 6:
+                    Review.objects.create(user=user, mark=mark, text=text)
+            except:
+                messages.error(request, "Mark is required")
+            return redirect('index')
     else:
         context = {"reviews": Review.objects.all()[:8]}
         return render(
