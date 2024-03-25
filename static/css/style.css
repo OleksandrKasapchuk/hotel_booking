@@ -361,7 +361,8 @@ main a:visited {
 
 .category_box h2 {
     color: rgb(201, 201, 201);
-    font-size: 2rem;
+    font-size: 1.7rem;
+    margin-top: 5px;
 }
 
 .category_box {
