@@ -369,11 +369,7 @@ main a:visited {
     flex-direction: row;
     justify-content: space-between;
 }
-#payment {
-    width: 200px;
-    height: 200px;
-    background-color: brown;
-}
+
 .ad2{
     display: none;
 }

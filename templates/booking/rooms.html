@@ -7,17 +7,17 @@
         {% csrf_token %}
         <fieldset class="choose-type-container">
             <div class="category_box eco_box">
-                <input type="radio" class="btn-check" name="category" id="eco" autocomplete="off" value=1 onclick="displaySelectedRadio(this)"> 
+                <input type="radio" class="btn-check" name="category" id="eco" autocomplete="off" value=1> 
                 <label class="btn btn-secondary btn-ch" for="eco">Eco</label>
                 <h2>Sustainable.</h2>
             </div>
             <div class="category_box std_box">
-                <input type="radio" class="btn-check" name="category" id="standart" autocomplete="off" value=2 checked onclick="displaySelectedRadio(this)">  
+                <input type="radio" class="btn-check" name="category" id="standart" autocomplete="off" value=2 checked> 
                 <label class="btn btn-secondary btn-ch" for="standart">Standart</label>
                 <h2>Comfortable.</h2>
             </div>
             <div class="category_box vip_box">
-                <input type="radio" class="btn-check" name="category" id="vip" autocomplete="off" value=3 onclick="displaySelectedRadio(this)"> 
+                <input type="radio" class="btn-check" name="category" id="vip" autocomplete="off" value=3> 
                 <label class="btn btn-secondary btn-ch" for="vip">Vip</label>
                 <h2>Luxurious.</h2>
             </div>
@@ -40,41 +40,7 @@
             <label for="favor7">Buffet pass</label> <br>
         </fieldset>
 
-        <section id="payment">
-            <section id="money2"></section>
-            <article id="money"></article>
-        </section>
-
         <button type="submit" class="btn btn-primary btn-room">Submit</button>
-<!-- 
-        <input type='radio' name='abono-radio' value="100" id="cinco-clases-radio" onclick="displaySelectedRadio(this)">
-        <label for="cinco-clases-radio">1488</label>
-        <input type='radio' name='abono-radio' value="300" id="nueve-clases-radio" onclick="displaySelectedRadio(this)">
-        <label for="nueve-clases-radio">hitler</label>
-        <br>
-        <input type='checkbox' name='abono' value="200" id="cinco-clases" onclick="displaySelectedCheckBox(this)">
-        <label for="cinco-clases">muskat</label>
-        <input type='checkbox' name='abono' value="400" id="nueve-clases" onclick="displaySelectedCheckBox(this)">
-        <label for="nueve-clases">adopt</label>
-        <br> -->
-
-
-        </form>
-        <script>
-            function displaySelectedRadio(id) {
-                document.getElementById("money2").innerHTML = id.value;
-            }
-            function displaySelectedCheckBox(id) {
-                if (id.checked) {
-                    if (document.getElementById(id.value + "-disp")) {
-                        document.getElementById(id.value + "-disp").innerHTML = id.value;
-                    } else {
-                        document.getElementById("money").innerHTML = document.getElementById("money").innerHTML + '<p id="' + id.value + '-disp" >' + id.value + '</p>';
-                    }
-                } else {
-                    document.getElementById(id.value + "-disp").innerHTML = "";
-                }
-            }
-        </script>
+    </form>
 </main>
 {% endblock %}
